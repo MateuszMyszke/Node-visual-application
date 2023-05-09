@@ -15,6 +15,7 @@ function main() {
   })
 
   // load app/index.html as the window content
+  mainWindow.webContents.openDevTools();
   mainWindow.loadFile(path.join('app', 'index.html'));
 }
 
