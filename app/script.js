@@ -13,7 +13,7 @@ const App = () => {
  
   
   const startTimer = () => {
-    setTime(20);
+    setTime(1200);
     setStatus('work');
     setTimer(setInterval(() => {
       setTime(time => time - 1);
@@ -26,17 +26,22 @@ const App = () => {
     clearInterval(timer);
   }
   
+  const playBell = () => {
+    const bell = new Audio('./sounds/bell.wav');
+    bell.play();
+  };
+
   useEffect(() => {
     if(time == 0){
+      playBell();
       if(status === 'work'){
        setTime(20) 
        setStatus('rest')
-        console.log(status)
       }
-      else if(status === 'rest')
-        setTime(30)   
+      else if(status === 'rest'){
+        setTime(1200)   
         setStatus('work') 
-        console.log(status)
+      } 
     }
   });
   
