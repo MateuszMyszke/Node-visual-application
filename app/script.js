@@ -8,18 +8,42 @@ const App = () => {
   const [timer, setTimer] = useState(null);
 
 
-  
-    const min = String(Math.trunc(time / 60)).padStart(2, 0);
-    const sec = String(time % 60).padStart(2, 0);
+  const min = String(Math.trunc(time / 60)).padStart(2, 0);
+  const sec = String(time % 60).padStart(2, 0);
  
   
   const startTimer = () => {
-    setTime(1200);
+    setTime(20);
     setStatus('work');
     setTimer(setInterval(() => {
       setTime(time => time - 1);
     }, 1000));
   };
+
+  const stopTimer =() => {
+    setStatus('off');
+    setTime(null)
+    clearInterval(timer);
+  }
+  
+  useEffect(() => {
+    if(time == 0){
+      if(status === 'work'){
+       setTime(20) 
+       setStatus('rest')
+        console.log(status)
+      }
+      else if(status === 'rest')
+        setTime(30)   
+        setStatus('work') 
+        console.log(status)
+    }
+  });
+  
+  const closeApp = () => {
+    window.close()
+  }
+
 
   return (
     <div>
@@ -38,8 +62,8 @@ const App = () => {
         </div>
       )}
       { status === 'off' && (<button className="btn" onClick={startTimer}>Start</button>)}
-      { status !== 'off' && (<button className="btn">Stop</button>)}
-      <button className="btn btn-close">X</button>
+      { status !== 'off' && (<button className="btn" onClick={stopTimer}>Stop</button>)}
+      <button className="btn btn-close" onClick={closeApp}>X</button>
     </div>
   );
  
